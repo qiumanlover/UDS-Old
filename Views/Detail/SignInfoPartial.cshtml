@@ -1,0 +1,23 @@
+﻿@model IEnumerable<UDS.Models.SignInfo>
+
+<table style="width:100%">
+    <thead>
+        <tr>
+            <td align="center" style="width:15%">签核人</td>
+            <td align="center" style="width:40%">签核时间</td>
+            <td align="center" style="width:20%">签核结果</td>
+            <td align="center" style="width:25%">原因</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UDS.Models.SignInfo item in ViewBag.SignInfoList)
+        {
+            <tr style="border-style:solid; border-top:thick solid; border-bottom:thick solid">
+                <td align="center" style="width:15%">@item.SignName</td>
+                <td align="center" style="width:40%">@item.SignTime</td>
+                <td align="center" style="width:20%">@item.Result</td>
+                <td align="center" style="width:25%">@item.Reason</td>
+            </tr>
+        }
+    </tbody>
+</table>

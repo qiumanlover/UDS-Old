@@ -1,0 +1,15 @@
+﻿<html>
+<head>
+    <title>Write</title>
+    @{
+        string pagename = ViewBag.pageName;
+    }
+</head>
+<body>
+    <div>
+        @{
+            Html.RenderAction(pagename, new { isNew = 1, id = ViewBag.Id });
+        }
+    </div>
+</body>
+</html>

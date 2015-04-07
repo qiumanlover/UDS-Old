@@ -1,0 +1,11 @@
+﻿<div>
+    @Ajax.ActionLink("我的申请", "OwnApplyList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { id = "fevent" })
+    <br />
+    @Ajax.ActionLink("草稿箱", "OwnDraftList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <br />
+    @Ajax.ActionLink("撰稿", "WriteList", "List", null, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <br />
+    @Ajax.ActionLink("代理", "Agent", new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    @*<br />
+        @Ajax.ActionLink("修改密码", "ModifyPass", new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })*@
+</div>

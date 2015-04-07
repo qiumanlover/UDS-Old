@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "UserPage";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    string ename = ViewBag.userName;
+    ViewBag.Ename = ename;
+    string id = ViewBag.id;
+    string guid = ViewBag.guid;
+    ViewBag.Id = id;
+    ViewBag.Guid = guid;
+}
+
+@section nav{
+    @{
+        string pageName = ViewBag.PageName;
+    }
+    @Html.Partial(pageName)
+}
+<div id="replace">
+    @{
+    //Html.RenderAction("NextSignList", "List");
+    }
+</div>

@@ -1,0 +1,46 @@
+﻿<html>
+<head>
+    <title>Detail</title>
+</head>
+<body>
+    @{
+        string pageName = ViewBag.pageName;
+        string actionname = ViewBag.ActionName;
+    }
+    <div style="float:left">
+        @Ajax.ActionLink("返回", actionname, "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace ", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    </div>
+    <div id="baseinfo" style="width:100%">
+        <div style="width:100%; height:30px; text-align:center">基本信息</div>
+        @{
+            Html.RenderPartial("BaseInfoPartial", (ViewBag.BaseInfo as UDS.Models.BaseInfo));
+        }
+    </div>
+    <hr />
+    <div id="flowinfo" style="width:100%">
+        <div style="width:100%;height:30px; text-align:center">表单详情</div>
+        @Html.Action(pageName, new { innerid = ViewBag.innerId, show = ViewBag.show, id = ViewBag.Id, isOld = ViewBag.Old })
+    </div>
+    @if (ViewBag.canSign == 1)
+    {
+        <hr />
+        <div style="width:100%; text-align:center;">
+            @using (Ajax.BeginForm("SignDeal", new { id = ViewBag.Id }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+            {
+                <input type="submit" value="同意" id="save" name="agree" />
+                <input type="submit" value="退回" id="send" name="disagree" />
+                <span>意见：</span>
+                <input type="text" name="reason" id="reason" />
+            }
+        </div>
+    }
+
+    <hr />
+    <div id="signinfo" style="width:100%">
+        <div style="width:100%; height:30px; text-align:center">签核信息</div>
+        @{
+            Html.RenderPartial("SignInfoPartial", (ViewBag.SignInfoList as IEnumerable<UDS.Models.SignInfo>));
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿<html>
+<head>
+    <title></title>
+    @{
+        string pageName = ViewBag.PageName;
+    }
+</head>
+<body>
+    <div>
+        @Ajax.ActionLink("返回", "OwnDraftList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace ", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    </div>
+    <div style="width:100%">
+        @Html.Action(pageName, new { innerid = ViewBag.InnerId, show = ViewBag.Show, id = ViewBag.Id, isOld = ViewBag.isOld })
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/ajax.js"></script>
+    <script src="~/Scripts/laydate/laydate.js"></script>
+
+    <script type="text/javascript">
+        var sh;
+        function IsLoad() {
+            var uid = document.getElementById("uid").innerHTML;
+            var guid = document.getElementById("guid").innerHTML;
+            ajaxPost("/Login/CheckLoad", "uid=" + uid + "&guid=" + guid, function onsuccess(text) {
+                if (text.indexOf("Error") >= 0) {
+                    clearInterval(sh);
+                    document.write(text);
+                }
+            }, function onfail(text) {
+                clearInterval(sh);
+            })
+        }
+        sh = setInterval(IsLoad, 3000);
+    </script>
+    <script type="text/javascript">
+        function showtime() {
+            var today = new Date()
+            var year = today.getFullYear()
+            var month = today.getMonth()
+            var day = today.getDate()
+            var h = today.getHours()
+            var m = today.getMinutes()
+            var s = today.getSeconds()
+            m = checkTime(m)
+            s = checkTime(s)
+            $('#timeshow').text((year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s).toString())
+            setTimeout('showtime()', 500)
+        }
+        function checkTime(i) {
+            if (i < 10)
+            { i = "0" + i }
+            return i
+        }
+    </script>
+    <script>
+        jQuery(function ($) {
+            $("a#fevent").click();
+        });
+    </script>
+    <link href="~/Content/main.css" type="text/css" rel="stylesheet" />
+</head>
+<body onload="showtime()">
+    <div id="page">
+        <div id="header">
+            <div id="bg"></div>
+            <div id="headinfo">
+                <div style="float:left; width:1px">
+                    <span id="uid" hidden="hidden" style="visibility:hidden">@ViewBag.Id</span>
+                    <span id="guid" hidden="hidden" style="visibility:hidden">@ViewBag.Guid</span>
+                </div>
+                <div id="greet">
+                    您好, @ViewBag.Ename
+                </div>
+                <div id="timeshow"></div>
+                <div id="logout"><a href="/Login/LogOut" style="text-decoration:none">退出</a></div>
+            </div>
+        </div>
+        <div id="main">
+            <div id="nav">
+                @RenderSection("nav", required: false)
+            </div>
+            <div id="content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+</html>
