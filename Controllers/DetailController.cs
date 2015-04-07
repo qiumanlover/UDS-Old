@@ -264,6 +264,12 @@ namespace UDS.Controllers
             //初始化下拉列表的数据信息            
             ViewData["typelist"] = UDS.Models.QJInfo.GetTypeList();
             ViewBag.Before = -2;            //开始日期的选择范围限制
+            ViewBag.HourPreDay = 8;
+            ViewBag.LastWorkHour = 17;
+            ViewBag.LastWorkMin = 0;
+            ViewBag.BeginWorkHour = 9;
+            ViewBag.BeginWorkMin = 0;
+
             if (pars.ContainsKey("isNew"))
             {//新建表单时的空页面显示
                 ViewBag.Display = 1;
@@ -323,7 +329,7 @@ namespace UDS.Controllers
         public ActionResult GCInfo(Dictionary<string, int> pars, GCInfo gcinfo)
         {
             //开始日期的选择范围限制
-            ViewBag.Before = -2;            
+            ViewBag.Before = -2;
             if (pars.ContainsKey("isNew"))
             {//新建表单时的空页面显示
                 ViewBag.Display = 1;

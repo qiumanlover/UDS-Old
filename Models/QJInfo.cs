@@ -20,6 +20,7 @@ namespace UDS.Models
         [DataType(DataType.Time, ErrorMessage = "时间格式错误")]
         public DateTime EndTime { get; set; }
 
+        [Range(0.0, double.MaxValue, ErrorMessage = "开始时间必须早于结束时间")]
         public double TotalTime { get; set; }
 
         [Required(ErrorMessage = "*")]

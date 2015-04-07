@@ -6,10 +6,24 @@
 
 <script type="text/javascript">
     function qjtotaltime() {
-        var begintime = Date.parse(new Date($("#BeginTime").val().toString().replace(/-/g, "/")))
-        var endtime = Date.parse(new Date($("#EndTime").val().toString().replace(/-/g, "/")));
-        var totaltime = endtime - begintime;
-        var time = totaltime * 1.0 / (1000 * 3600);
+        alert("begin");
+        var begintime = new Date($("#BeginTime").val().toString().replace(/-/g, "/"));
+        var beginminseconds = Date.parse(begintime);
+        var endtime = new Date($("#EndTime").val().toString().replace(/-/g, "/"));
+        var endminseconds = Date.parse(endtime);
+        var totaltime = endminseconds - beginminseconds;
+        alert(totaltime);
+        var dayhours = (totaltime / (1000 * 3600 * 24)) * @ViewBag.HoursPreDay;
+        begintime.setHours(@ViewBag.LastWorkHour, @ViewBag.LastWorkMin, 0);
+        alert(begintime);
+        var lastworkminseconds = Date.parse(begintime);
+        alert(lastworkminseconds);
+        endtime.setHours(@ViewBag.BeginWorkHour, @ViewBag.BeginWorkMin, 0);
+        var beginworkminseconds = Date.parse(endtime);
+        var lefthours = (lastworkminseconds - beginminseconds) * 1.0 / (1000 * 3600) + ((beginworkminseconds - endminseconds) * 1.0 / (1000 * 3600));
+        var time = dayhours + lefthours;
+
+        //var time = totaltime * 1.0 / (1000 * 3600);
         $("#TotalTime").val(time.toFixed(2));
     }
 </script>
@@ -38,6 +52,7 @@
             <td style="width:40%" align="right">总时长：</td>
             <td style="width:60%">
                 @Html.TextBoxFor(model => model.TotalTime, new { onclick = "qjtotaltime()" })
+                @Html.ValidationMessageFor(model => model.TotalTime)
             </td>
         </tr>
         <tr>
@@ -57,8 +72,8 @@
     if (ViewBag.Display == 1)
     {
         <div style="width:100%; text-align:center">
-            <input type="submit" value="保存" id="save" name="save" onclick="totaltime()" />
-            <input type="submit" value="发送" id="send" name="send" onclick="totaltime()" />
+            <input type="submit" value="保存" id="save" name="save" onclick="qjtotaltime()" />
+            <input type="submit" value="发送" id="send" name="send" onclick="qjtotaltime()" />
         </div>
     }
 }

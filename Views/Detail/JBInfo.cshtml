@@ -42,6 +42,7 @@
             <td style="width:40%" align="right">总时长：</td>
             <td style="width:60%">
                 @Html.TextBoxFor(model => model.TotalTime, new { onclick = "totaltime()", Readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.TotalTime)
             </td>
         </tr>
         <tr>
