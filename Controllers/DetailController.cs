@@ -265,8 +265,8 @@ namespace UDS.Controllers
             ViewData["typelist"] = UDS.Models.QJInfo.GetTypeList();
             ViewBag.Before = -2;            //开始日期的选择范围限制
             ViewBag.HourPreDay = 8;
-            ViewBag.LastWorkHour = 17;
-            ViewBag.LastWorkMin = 0;
+            ViewBag.EndWorkHour = 17;
+            ViewBag.EndWorkMin = 0;
             ViewBag.BeginWorkHour = 9;
             ViewBag.BeginWorkMin = 0;
 

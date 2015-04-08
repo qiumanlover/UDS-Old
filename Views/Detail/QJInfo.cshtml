@@ -6,28 +6,33 @@
 
 <script type="text/javascript">
     function qjtotaltime() {
-        alert("begin");
+        var hourpreday = Number($("#hourpreday").text().toString());
+        var beginworkhour = Number($("#beginworkhour").text().toString());
+        var beginworkmin = Number($("#beginworkmin").text().toString());
+        var endworkhour = Number($("#endworkhour").text().toString());
+        var endworkmin = Number($("#endworkmin").text().toString());
+
         var begintime = new Date($("#BeginTime").val().toString().replace(/-/g, "/"));
         var beginminseconds = Date.parse(begintime);
         var endtime = new Date($("#EndTime").val().toString().replace(/-/g, "/"));
         var endminseconds = Date.parse(endtime);
         var totaltime = endminseconds - beginminseconds;
-        alert(totaltime);
-        var dayhours = (totaltime / (1000 * 3600 * 24)) * @ViewBag.HoursPreDay;
-        begintime.setHours(@ViewBag.LastWorkHour, @ViewBag.LastWorkMin, 0);
-        alert(begintime);
+        var dayhours = (Math.floor(totaltime / (1000 * 3600 * 24)) - 1) * hourpreday;
+        
+        begintime.setHours(endworkhour, endworkmin, 0);
         var lastworkminseconds = Date.parse(begintime);
-        alert(lastworkminseconds);
-        endtime.setHours(@ViewBag.BeginWorkHour, @ViewBag.BeginWorkMin, 0);
+        endtime.setHours(beginworkhour, beginworkmin, 0);
         var beginworkminseconds = Date.parse(endtime);
-        var lefthours = (lastworkminseconds - beginminseconds) * 1.0 / (1000 * 3600) + ((beginworkminseconds - endminseconds) * 1.0 / (1000 * 3600));
+        var timeb = (lastworkminseconds - beginminseconds) * 1.0 / (1000 * 3600);
+        var timee = (endminseconds - beginworkminseconds) * 1.0 / (1000 * 3600);
+        var lefthours = timeb + timee;
         var time = dayhours + lefthours;
-
-        //var time = totaltime * 1.0 / (1000 * 3600);
         $("#TotalTime").val(time.toFixed(2));
     }
 </script>
-
+<span id="beginworkhour" hidden>@ViewBag.BeginWorkHour</span><span id="beginworkmin" hidden>@ViewBag.BeginWorkMin</span>
+<span id="endworkhour" hidden>@ViewBag.EndWorkHour</span><span id="endworkmin" hidden>@ViewBag.EndWorkMin</span>
+<span id="hourpreday" hidden>@ViewBag.HourPreDay</span>
 @using (Ajax.BeginForm("QJInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
 {
     @Html.AntiForgeryToken()
