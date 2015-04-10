@@ -37,4 +37,3 @@ D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\zh-Hans\System.W
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.dll
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.pdb
-D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.csprojResolveAssemblyReference.cache

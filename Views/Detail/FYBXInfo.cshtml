@@ -1,0 +1,78 @@
+﻿@model UDS.Models.FYBXInfo
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script type="text/javascript">
+    function totaltime() {
+        var begintime = Date.parse(new Date($("#BeginTime").val().toString().replace(/-/g, "/")));
+        var endtime = Date.parse(new Date($("#EndTime").val().toString().replace(/-/g, "/")));
+        var totaltime = endtime - begintime;
+        var time = totaltime * 1.0 / (1000 * 3600);
+        $("#TotalTime").val(time.toFixed(2));
+    }
+</script>
+
+
+@using (Ajax.BeginForm("FYBXInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <table style="width:100%">
+        <tr>
+            <td style="width:40%" align="right">用途：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.Usage)
+                @Html.ValidationMessageFor(model => model.Usage)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">发生日期：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.HappenDate, new { onclick = "laydate({ formate: 'YYYY-MM-DD', festival: true, isclear: false, istoday:false, issure:false })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
+                @Html.ValidationMessageFor(model => model.HappenDate)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">报销金额：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.Money)
+                @Html.ValidationMessageFor(model => model.Money)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">大写金额：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.BMoney)
+                @Html.ValidationMessageFor(model => model.BMoney)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">暂支金额：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.PrePay)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">应还金额：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.ReturnPay)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">附件：</td>
+            <td style="width:60%">
+                <input type="file" name="AttachPath" id="AttachPath" />
+            </td>
+        </tr>
+    </table>
+    if (ViewBag.Display == 1)
+    {
+        <div style="width:100%; text-align:center">
+            <input type="submit" value="保存" id="save" name="save" />
+            <input type="submit" value="发送" id="send" name="send" />
+        </div>
+    }
+}

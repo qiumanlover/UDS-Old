@@ -138,6 +138,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseInfo.cs" />
+    <Compile Include="Models\FYBXInfo.cs" />
     <Compile Include="Models\GCInfo.cs" />
     <Compile Include="Models\GlobeLoad.cs" />
     <Compile Include="Models\InfoList.cs" />
@@ -271,6 +272,7 @@
     <Content Include="Views\Detail\DraftContainer.cshtml" />
     <Content Include="Views\Detail\QJInfo.cshtml" />
     <Content Include="Views\Detail\GCInfo.cshtml" />
+    <Content Include="Views\Detail\FYBXInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
