@@ -1,0 +1,54 @@
+﻿@model UDS.Models.PXInfo
+
+@using (Ajax.BeginForm("PXInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <table style="width:100%">
+        <tr>
+            <td style="width:40%" align="right">开始日期：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.BeginDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', start : laydate.now() })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
+                @Html.ValidationMessageFor(model => model.BeginDate)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">结束日期：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.EndDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', start : laydate.now() })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">培训类型：</td>
+            <td style="width:60%">
+                @Html.DropDownListFor(model => model.TypeId, ViewData["typelist"] as List<SelectListItem>)
+            </td>
+        </tr>
+       <tr>
+            <td style="width:40%" align="right">培训名称：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </td>
+        </tr>
+        <tr>
+            <td style="width:40%" align="right">培训内容：</td>
+            <td style="width:60%">
+                @Html.TextBoxFor(model => model.AttachContent)
+                @Html.ValidationMessageFor(model => model.AttachContent)
+            </td>
+        </tr>
+    </table>
+    if (ViewBag.Display == 1)
+    {
+        <script src="~/Scripts/jquery-1.8.2.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        <div style="width:100%; text-align:center">
+            <input type="submit" value="保存" id="save" name="save" />
+            <input type="submit" value="发送" id="send" name="send" />
+        </div>
+    }
+}

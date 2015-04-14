@@ -17,6 +17,7 @@ D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\System.Web.WebPa
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\System.Web.WebPages.Razor.dll
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\WebGrease.dll
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\EntityFramework.xml
+D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\Newtonsoft.Json.pdb
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\Newtonsoft.Json.xml
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\System.Net.Http.xml
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\System.Net.Http.WebRequest.xml
@@ -37,3 +38,5 @@ D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\zh-Hans\System.W
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.dll
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.pdb
+D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.csproj.GenerateResource.Cache
+D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.Properties.Resources.resources

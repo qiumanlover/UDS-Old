@@ -1,9 +1,5 @@
 ﻿@model UDS.Models.JBInfo
 
-<script src="~/Scripts/jquery-1.8.2.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-
 <script type="text/javascript">
     function totaltime() {
         var begintime = Date.parse(new Date($("#BeginTime").val().toString().replace(/-/g, "/")));
@@ -27,14 +23,14 @@
         <tr>
             <td style="width:40%" align="right">开始时间：</td>
             <td style="width:60%">
-                @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, min : laydate.now(" + ViewBag.Before + "), formate: 'YYYY-MM-DD hh:mm:ss', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm:ss", Class = "laydate-icon-molv", value = DateTime.Now.ToString() })
+                @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, min : laydate.now(" + ViewBag.Before + "), format: 'YYYY-MM-DD hh:mm:ss', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm:ss", Class = "laydate-icon-molv", value = DateTime.Now.ToString() })
                 @Html.ValidationMessageFor(model => model.BeginTime)
             </td>
         </tr>
         <tr>
             <td style="width:40%" align="right">结束时间：</td>
             <td style="width:60%">
-                @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, formate: 'YYYY-MM-DD hh:mm:ss', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm:ss", Class = "laydate-icon-molv" })
+                @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, format: 'YYYY-MM-DD hh:mm:ss', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm:ss", Class = "laydate-icon-molv" })
                 @Html.ValidationMessageFor(model => model.EndTime)
             </td>
         </tr>
@@ -61,6 +57,9 @@
     </table>
     if (ViewBag.Display == 1)
     {
+        <script src="~/Scripts/jquery-1.8.2.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
         <div style="width:100%; text-align:center">
             <input type="submit" value="保存" id="save" name="save" onclick="totaltime()" />
             <input type="submit" value="发送" id="send" name="send" onclick="totaltime()" />

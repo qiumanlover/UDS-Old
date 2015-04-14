@@ -14,7 +14,7 @@ namespace UDS.Models
         [Required(ErrorMessage = "*")]
         public string Usage { get; set; }
 
-        [DataType(DataType.Time)]
+        [DataType(DataType.DateTime)]
         public DateTime HappenDate { get; set; }
 
         [Required(ErrorMessage = "*")]

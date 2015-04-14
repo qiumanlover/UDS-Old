@@ -1,19 +1,9 @@
 ﻿@model UDS.Models.FYBXInfo
 
-<script src="~/Scripts/jquery-1.8.2.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 <script type="text/javascript">
-    function totaltime() {
-        var begintime = Date.parse(new Date($("#BeginTime").val().toString().replace(/-/g, "/")));
-        var endtime = Date.parse(new Date($("#EndTime").val().toString().replace(/-/g, "/")));
-        var totaltime = endtime - begintime;
-        var time = totaltime * 1.0 / (1000 * 3600);
-        $("#TotalTime").val(time.toFixed(2));
-    }
-</script>
 
+</script>
 
 @using (Ajax.BeginForm("FYBXInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
 {
@@ -31,7 +21,7 @@
         <tr>
             <td style="width:40%" align="right">发生日期：</td>
             <td style="width:60%">
-                @Html.TextBoxFor(model => model.HappenDate, new { onclick = "laydate({ formate: 'YYYY-MM-DD', festival: true, isclear: false, istoday:false, issure:false })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
+                @Html.TextBoxFor(model => model.HappenDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', festival: true, isclear: false, istoday:false, issure:false })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
                 @Html.ValidationMessageFor(model => model.HappenDate)
             </td>
         </tr>
@@ -52,24 +42,54 @@
         <tr>
             <td style="width:40%" align="right">暂支金额：</td>
             <td style="width:60%">
-                @Html.TextBoxFor(model => model.PrePay)
+                @Html.TextBoxFor(model => model.PrePay, new { @readonly = "readonly" })
             </td>
         </tr>
         <tr>
             <td style="width:40%" align="right">应还金额：</td>
             <td style="width:60%">
-                @Html.TextBoxFor(model => model.ReturnPay)
+                @Html.TextBoxFor(model => model.ReturnPay, new { @readonly = "readonly" })
             </td>
         </tr>
         <tr>
-            <td style="width:40%" align="right">附件：</td>
-            <td style="width:60%">
-                <input type="file" name="AttachPath" id="AttachPath" />
+            <td style="width:40%" align="right">明细：</td>
+        </tr>
+        <tr>
+            <td style="width:60%" colspan="2">
+                @Html.DisplayFor(model => model.AttachPath)
             </td>
         </tr>
     </table>
     if (ViewBag.Display == 1)
     {
+        <script src="~/Scripts/jquery-1.8.2.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.validate.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
+
+        <script src="~/Scripts/ueditor/ueditor.all.js" type="text/javascript" charset="utf-8"></script>
+        <script src="~/Scripts/ueditor/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
+        <script src="~/Scripts/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript" charset="utf-8"></script>
+        @*<link href="~/Scripts/ueditor/themes/default/css/ueditor.css" rel="stylesheet" />
+        <link href="~/Scripts/ueditor/themes/iframe.css" rel="stylesheet" />*@
+
+        <div>
+            <textarea id="editor" name="editor" style="width:90%; height:300px"></textarea>
+            <script type="text/javascript" charset="utf-8">
+
+                var editorOption = {
+                    UEDITOR_HOME_URL: "~/Scripts/ueditor/",
+                    initialContent: "",
+                    //initialFrameWidth: 700,
+                    //initialFrameHeight: 400
+                };
+                var editor = new baidu.editor.ui.Editor(editorOption);
+                editor.render('editor');
+                //var ue = UE.Editor("editor");
+                //$('form').submit(function () {
+                //    $('#AttachPath').val(editor.getContent());
+                //});
+            </script>
+        </div>
         <div style="width:100%; text-align:center">
             <input type="submit" value="保存" id="save" name="save" />
             <input type="submit" value="发送" id="send" name="send" />
