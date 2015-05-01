@@ -1,98 +1,75 @@
 ﻿@model UDS.Models.FYBXInfo
 
+@{
+    string stylestr = "display:none";
+}
 
-<script type="text/javascript">
-
-</script>
-
-@using (Ajax.BeginForm("FYBXInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+@using (Ajax.BeginForm("FYBXInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "writeview", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    <ul id="title">
+        <li>用途：</li>
+        <li>发生日期：</li>
+        <li>报销金额：</li>
+        <li>大写金额：</li>
+        <li>暂支金额：</li>
+        <li>应还金额：</li>
+        <li>明细：</li>
+    </ul>
 
-    <table style="width:100%">
-        <tr>
-            <td style="width:40%" align="right">用途：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.Usage)
-                @Html.ValidationMessageFor(model => model.Usage)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">发生日期：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.HappenDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', festival: true, isclear: false, istoday:false, issure:false })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
-                @Html.ValidationMessageFor(model => model.HappenDate)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">报销金额：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.Money)
-                @Html.ValidationMessageFor(model => model.Money)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">大写金额：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.BMoney)
-                @Html.ValidationMessageFor(model => model.BMoney)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">暂支金额：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.PrePay, new { @readonly = "readonly" })
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">应还金额：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.ReturnPay, new { @readonly = "readonly" })
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">明细：</td>
-        </tr>
-        <tr>
-            <td style="width:60%" colspan="2">
-                @Html.DisplayFor(model => model.AttachPath)
-            </td>
-        </tr>
-    </table>
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.Usage)
+            @Html.ValidationMessageFor(model => model.Usage)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.HappenDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', festival: true, isclear: false, istoday:false, issure:false })", placeholder = "YYYY-MM-DD", Class = "laydate-icon", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.HappenDate)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Money)
+            @Html.ValidationMessageFor(model => model.Money)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.BMoney)
+            @Html.ValidationMessageFor(model => model.BMoney)
+        </li>
+        <li>@Html.TextBoxFor(model => model.PrePay)</li>
+        <li>@Html.TextBoxFor(model => model.ReturnPay)</li>
+        <li></li>
+        <li>@Html.TextBoxFor(model => model.AttachContent, new { style = "display:none" })</li>
+    </ul>
+
+    if (ViewBag.Display == 0)
+    {
+        <div id="detailShowContainer">
+            <table>
+                <tr><td>@Html.Raw(Model.AttachContent)</td></tr>
+            </table>
+        </div>
+    }
     if (ViewBag.Display == 1)
     {
-        <script src="~/Scripts/jquery-1.8.2.js" type="text/javascript"></script>
-        <script src="~/Scripts/jquery.validate.js" type="text/javascript"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
-
-        <script src="~/Scripts/ueditor/ueditor.all.js" type="text/javascript" charset="utf-8"></script>
-        <script src="~/Scripts/ueditor/ueditor.config.js" type="text/javascript" charset="utf-8"></script>
-        <script src="~/Scripts/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript" charset="utf-8"></script>
-        @*<link href="~/Scripts/ueditor/themes/default/css/ueditor.css" rel="stylesheet" />
-        <link href="~/Scripts/ueditor/themes/iframe.css" rel="stylesheet" />*@
-
-        <div>
-            <textarea id="editor" name="editor" style="width:90%; height:300px"></textarea>
-            <script type="text/javascript" charset="utf-8">
-
-                var editorOption = {
-                    UEDITOR_HOME_URL: "~/Scripts/ueditor/",
-                    initialContent: "",
-                    //initialFrameWidth: 700,
-                    //initialFrameHeight: 400
-                };
-                var editor = new baidu.editor.ui.Editor(editorOption);
-                editor.render('editor');
-                //var ue = UE.Editor("editor");
-                //$('form').submit(function () {
-                //    $('#AttachPath').val(editor.getContent());
-                //});
-            </script>
-        </div>
-        <div style="width:100%; text-align:center">
+        stylestr = "width:90%; text-align:right;";
+       <script type="text/javascript" charset="utf-8">
+            var content = $("input#AttachContent").val();
+            var editorOption = {
+                initialContent: content,
+                initialFrameHeight: 300,
+                initialFrameWidth: 810,
+                autoHeightEnabled: false,
+            };
+            var editor = new baidu.editor.ui.Editor(editorOption);
+            editor.render('editor');
+            $('#save').click(function () {
+                $('#AttachContent').val(editor.getContent());
+            });
+        </script>
+        <div id="btnContainer">
             <input type="submit" value="保存" id="save" name="save" />
             <input type="submit" value="发送" id="send" name="send" />
         </div>
     }
 }
+<div id="editorContainer">
+    <textarea id="editor" name="editor" style=@stylestr></textarea>
+</div>

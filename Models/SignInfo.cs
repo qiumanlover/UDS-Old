@@ -19,7 +19,7 @@ namespace UDS.Models
             {
                 SignInfo signinfo = new SignInfo();
                 signinfo.SignName = row["name"].ToString();
-                signinfo.SignTime = row["signtime"].ToString();
+                signinfo.SignTime = Convert.ToDateTime(row["signtime"]).ToString("yyyy-MM-dd HH:mm:ss");
                 signinfo.Result = row["result"].ToString();
                 signinfo.Reason = row["reason"].ToString();
                 signInfoList.Add(signinfo);

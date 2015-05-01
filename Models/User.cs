@@ -70,5 +70,10 @@ namespace UDS
             this.isDelete = Convert.ToBoolean(dt.Rows[0]["isdelete"]);
             return this;
         }
+
+        internal int UpdatePass(string pass)
+        {
+            return SQLHelper.ExecuteNonQuery("update T_user set password=@pass where id=@id", pass, this.Id);
+        }
     }
 }

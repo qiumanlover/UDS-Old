@@ -113,7 +113,7 @@ namespace UDS.Controllers
             foreach (DataRow row in dt.Rows)
             {
                 InfoList info = new InfoList();
-                info = info.DBDateToInfo(row, columns);
+                info = info.DBDataToInfo(row, columns);
                 data.Add(info);
             }
             return data;

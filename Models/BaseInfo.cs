@@ -22,7 +22,7 @@ namespace UDS.Models
             this.Applier = dtBaseInfo.Rows[0]["name"].ToString();
             this.Department = dtBaseInfo.Rows[0]["department"].ToString();
             this.Posotion = dtBaseInfo.Rows[0]["position"].ToString();
-            this.Writetime = dtBaseInfo.Rows[0]["writetime"].ToString();
+            this.Writetime = Convert.ToDateTime(dtBaseInfo.Rows[0]["writetime"]).ToString("yyyy-MM-dd HH:mm:ss");
             this.State = dtBaseInfo.Rows[0]["state"].ToString();
             this.Nextname = dtBaseInfo.Rows[0]["nextname"].ToString();
 

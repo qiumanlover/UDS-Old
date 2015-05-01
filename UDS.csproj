@@ -48,9 +48,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -132,13 +132,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Models\BGWJInfo.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Models\AgencyList.cs" />
+    <Compile Include="Models\CommonModelInfo.cs" />
     <Compile Include="Models\FilterableClientDataTypeModelValidatorProvider.cs" />
     <Compile Include="Models\GDZCInfo.cs" />
     <Compile Include="Models\HYJLInfo.cs" />
     <Compile Include="Models\ISQLModel.cs" />
     <Compile Include="Models\PXInfo.cs" />
     <Compile Include="Models\QTJLInfo.cs" />
+    <Compile Include="Models\StatisticsList.cs" />
     <Compile Include="Models\SYQMKHInfo.cs" />
     <Compile Include="Models\XZJXInfo.cs" />
     <Compile Include="Models\ZZInfo.cs" />
@@ -178,6 +182,9 @@
     <Compile Include="SqlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\detailInputStyle.css" />
+    <Content Include="Content\diffcolorlist.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -233,6 +240,13 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\treemenu.css" />
+    <Content Include="Content\tree_20110125zzjs_net.gif" />
+    <Content Include="Scripts\diffcolorlist.js" />
+    <Content Include="Scripts\docready.js" />
+    <Content Include="Scripts\hxmd5.js" />
+    <Content Include="Scripts\treemenu.js" />
+    <Content Include="Scripts\ueditorinitial.js" />
     <Content Include="Scripts\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Scripts\ueditor\dialogs\attachment\attachment.html" />
@@ -543,7 +557,6 @@
     <Content Include="Views\List\RecordSignList.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\ueditor1.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -578,12 +591,19 @@
     <Content Include="Views\Detail\FYBXInfo.cshtml" />
     <Content Include="Views\Detail\SYQMKHInfo.cshtml" />
     <Content Include="Views\Detail\HYJLInfo.cshtml" />
-    <Content Include="Views\Detail\BGWJInfo.cshtml" />
+    <Content Include="Views\Detail\CommonModelInfo.cshtml" />
     <Content Include="Views\Detail\QTJLInfo.cshtml" />
     <Content Include="Views\Detail\XZJXInfo.cshtml" />
     <Content Include="Views\Detail\PXInfo.cshtml" />
     <Content Include="Views\Detail\GDZCInfo.cshtml" />
     <Content Include="Views\Detail\ZZInfo.cshtml" />
+    <Content Include="Views\Agent\AgentConfig.cshtml" />
+    <Content Include="Views\Agent\AgentSign.cshtml" />
+    <Content Include="Views\Agent\AgentHistory.cshtml" />
+    <Content Include="Views\Agent\AgentAdd.cshtml" />
+    <Content Include="Views\Login\ModifyPass.cshtml" />
+    <Content Include="Views\Statistics\QJSta.cshtml" />
+    <Content Include="Views\Statistics\JBSta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

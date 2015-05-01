@@ -27,19 +27,19 @@ namespace UDS.Models
 
         public decimal ReturnPay { get; set; }
 
-        public string AttachPath { get; set; }
+        public string AttachContent { get; set; }
 
         public FYBXInfo() { }
 
         internal static int AddInfo(FYBXInfo fybxinfo)
         {
-            object obj = SQLHelper.ExecuteScalar("insert into T_fybx(usage, happendate, money, bmoney, prepay, returnpay, attachpath) output inserted.id values(@usage, @happendate, @money, @bmoney, @prepay, @returnpay, @attachpath)", fybxinfo.Usage, fybxinfo.Money, fybxinfo.BMoney, fybxinfo.PrePay, fybxinfo.ReturnPay, fybxinfo.AttachPath);
+            object obj = SQLHelper.ExecuteScalar("insert into T_fybx(usage, happendate, money, bmoney, prepay, returnpay, attachpath) output inserted.id values(@usage, @happendate, @money, @bmoney, @prepay, @returnpay, @attachpath)", fybxinfo.Usage, fybxinfo.HappenDate, fybxinfo.Money, fybxinfo.BMoney, fybxinfo.PrePay, fybxinfo.ReturnPay, fybxinfo.AttachContent);
             return Convert.ToInt32(obj);
         }
 
         internal static int UpdateInfo(FYBXInfo fybxinfo, int id)
         {
-            object obj = SQLHelper.ExecuteNonQuery("update T_fybx set usage=@usage, happendate=@happendate, money=@money, bmoney=@bmoney, prepay=@prepay, returnpay=@returnpay, attachpath=@attachpath where id=@id", fybxinfo.Usage, fybxinfo.Money, fybxinfo.BMoney, fybxinfo.PrePay, fybxinfo.ReturnPay, fybxinfo.AttachPath, id);
+            object obj = SQLHelper.ExecuteNonQuery("update T_fybx set usage=@usage, happendate=@happendate, money=@money, bmoney=@bmoney, prepay=@prepay, returnpay=@returnpay, attachpath=@attachpath where id=@id", fybxinfo.Usage, fybxinfo.HappenDate, fybxinfo.Money, fybxinfo.BMoney, fybxinfo.PrePay, fybxinfo.ReturnPay, fybxinfo.AttachContent, id);
             return Convert.ToInt32(obj);
         }
 
@@ -54,7 +54,7 @@ namespace UDS.Models
             info.BMoney = dt.Rows[0]["bmoney"].ToString();
             info.PrePay = Convert.ToDecimal(dt.Rows[0]["prepay"]);
             info.ReturnPay = Convert.ToDecimal(dt.Rows[0]["returnpay"]);
-            info.AttachPath = dt.Rows[0]["attachpath"].ToString();
+            info.AttachContent = dt.Rows[0]["attachpath"].ToString();
 
             return info;
         }

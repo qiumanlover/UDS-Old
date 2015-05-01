@@ -69,7 +69,9 @@ namespace UDS.Controllers
             {
                 if (!UDS.Models.GlobeLoad.CheckLoad(name, uniid))
                 {
-                    return View();
+                    //return View();
+                    //return Content(@"<script type='text/javascript'>alert('当前账号在其他地方登录, 请重新登录!');self.location.href = '/Login/Index';</script>");
+                    return Content("Error");
                 }
                 else
                 {
@@ -80,6 +82,30 @@ namespace UDS.Controllers
             {
                 return RedirectToAction("LogOut");
             }
+        }
+
+        public ActionResult ModifyPass()
+        {
+            ViewBag.Msg = Request["msg"] ?? "";
+            if (Request["submit"] != null)
+            {
+                User user = Session["user"] as User;
+                string curpass = Request["curpass"].ToString();
+                if (user.Password.Equals(curpass))
+                {
+                    user.UpdatePass(Request["newpass"].ToString());
+                    Session.Clear();
+                    return Content("<script type='text/javascript'>alert('密码修改成功, 请重新登录!');self.location.href = '/Login/Index';</script>");
+                }
+                else
+                {
+                    ViewBag.Msg = "当前密码错误";
+                    ViewBag.CurPass = curpass;
+                    ViewBag.NewPass = Request["newpass"] ?? "";
+                    ViewBag.NewPass2 = Request["newpass2"] ?? "";
+                }                
+            }
+            return PartialView();
         }
     }
 }

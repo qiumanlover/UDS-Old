@@ -35,17 +35,80 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars: [[
-            'fullscreen', 'source', '|', 'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-            'directionalityltr', 'directionalityrtl', 'indent', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-            'print', 'preview', 'searchreplace', 'help', 'drafts'
+            'undo', //撤销
+                    'redo', //重做
+                    '|',
+                    'pasteplain', //纯文本粘贴模式
+                    'formatmatch', //格式刷
+                    'removeformat', //清除格式
+                    'fontfamily', //字体
+                    'fontsize', //字号
+                    'bold', //加粗
+                    'italic', //斜体
+                    'forecolor', //字体颜色
+                    'backcolor', //背景色
+                    'underline', //下划线
+                    'strikethrough', //删除线
+                    'subscript', //下标
+                    'superscript', //上标
+                    'fontborder', //字符边框
+                    '|',
+                    'link', //超链接
+                    'unlink', //取消链接
+                    'attachment', //附件
+                    'spechars', //特殊字符
+                    'emotion', //表情
+                    'scrawl', //涂鸦
+                    'simpleupload', //单图上传
+                    '|',
+                    'print', //打印
+                    'preview', //预览
+                    'fullscreen', //全屏
+
+                    'inserttable', //插入表格
+                    'insertrow', //前插入行
+                    'insertcol', //前插入列
+                    'deleterow', //删除行
+                    'deletecol', //删除列
+                    'splittorows', //拆分成行
+                    'splittocols', //拆分成列
+                    'splittocells', //完全拆分单元格
+                    'mergecells', //合并多个单元格
+                    'insertparagraphbeforetable', //"表格前插入行"
+                    'deletetable', //删除表格
+                    'edittd', //单元格属性
+                    'edittable', //表格属性
+                    '|',
+                    'indent', //首行缩进
+                    'lineheight', //行间距
+                    'rowspacingtop', //段前距
+                    'rowspacingbottom', //段后距
+                    'justifyleft', //居左对齐
+                    'justifyright', //居右对齐
+                    'justifycenter', //居中对齐
+                    'justifyjustify', //两端对齐
+                    '|',
+                    'insertorderedlist', //有序列表
+                    'insertunorderedlist', //无序列表
+                    'directionalityltr', //从左向右输入
+                    'directionalityrtl', //从右向左输入
+                    'pagebreak', //分页
+                    'customstyle', //自定义标题
+                    'searchreplace', //查询替换
+                    'autotypeset', //自动排版
+                    '|',
+                    'source', //源代码
+            //'fullscreen', 'source', '|', 'undo', 'redo', '|',
+            //'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+            //'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+            //'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+            //'directionalityltr', 'directionalityrtl', 'indent', '|',
+            //'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+            //'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+            //'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+            //'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+            //'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+            //'print', 'preview', 'searchreplace', 'help', 'drafts'
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{

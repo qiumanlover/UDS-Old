@@ -1,39 +1,36 @@
 ﻿@model IEnumerable<UDS.Models.InfoList>
 
-<div style="height:450px">
-    <table border="0" style="width:100%">
-        <thead id="tbhead">
-            <tr>
-                <td style="width:25%" align="center">流程名称</td>
-                <td style="width:30%" align="center">填写时间</td>
-                <td style="width:15%" align="center">下一签核人</td>
-                <td style="width:20%" align="center">当前状态</td>
-                <td style="width:10%" align="center"></td>
-            </tr>
-        </thead>
-        <tbody>
+<div style="height:500px">
+    <ul style="list-style:none">
+        <li style="width:25%;float:left;text-align:center">流程名称</li>
+        <li style="width:30%;float:left;text-align:center">填写时间</li>
+        <li style="width:15%;float:left;text-align:center">待签核人</li>
+        <li style="width:20%;float:left;text-align:center">当前状态</li>
+        <li style="width:10%;float:left;text-align:center"></li>
+    </ul>
+    <div>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td style="width:25%" align="center">
+                <ul>
+                    <li style="width:25%;float:left;text-align:center">
                         @Html.DisplayFor(modelItem => item.FormName)
-                    </td>
-                    <td style="width:30%" align="center">
+                    </li>
+                    <li style="width:30%;float:left;text-align:center">
                         @Html.DisplayFor(modelItem => item.WriteTime)
-                    </td>
-                    <td style="width:15%" align="center">
+                    </li>
+                    <li style="width:15%;float:left;text-align:center">
                         @Html.DisplayFor(modelItem => item.NextSignName)
-                    </td>
-                    <td style="width:20%" align="center">
+                    </li>
+                    <li style="width:20%;float:left;text-align:center">
                         @Html.DisplayFor(modelItem => item.CurrentState)
-                    </td>
-                    <td style="width:10%" align="center">
+                    </li>
+                    <li style="width:10%;float:left;text-align:center">
                         @Ajax.ActionLink("进入", "DetailContainer", "Detail", new RouteValueDictionary(new { id = item.Id, show = 0, canSign = 0, backid = 2 }), new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
-                    </td>
-                </tr>
+                    </li>
+                </ul>
+                <br />
             }
-        </tbody>
-    </table>
+  </div>
 </div>
 <br />
 <div style="width:100%; text-align:center">

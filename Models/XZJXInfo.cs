@@ -16,19 +16,19 @@ namespace UDS.Models
         public DateTime ApplyMonth { get; set; }
 
         [Required(ErrorMessage = "*")]
-        public string AttchContent { get; set; }
+        public string AttachContent { get; set; }
 
         public XZJXInfo() { }
 
         internal static int AddInfo(XZJXInfo xzjxinfo)
         {
-            object obj = SQLHelper.ExecuteScalar("insert into T_xzjx(applymonth, attachcontent) output inserted.id values(@applymonth, @attachcontent)", xzjxinfo.ApplyMonth, xzjxinfo.AttchContent);
+            object obj = SQLHelper.ExecuteScalar("insert into T_xzjx(applymonth, attachcontent) output inserted.id values(@applymonth, @attachcontent)", xzjxinfo.ApplyMonth, xzjxinfo.AttachContent);
             return Convert.ToInt32(obj);
         }
 
         internal static int UpdateInfo(XZJXInfo xzjxinfo, int id)
         {
-            object obj = SQLHelper.ExecuteNonQuery("update T_xzjx set applymonth=@applymonth, attachcontent=@attachcontent, where id=@id", xzjxinfo.ApplyMonth, xzjxinfo.AttchContent, id);
+            object obj = SQLHelper.ExecuteNonQuery("update T_xzjx set applymonth=@applymonth, attachcontent=@attachcontent where id=@id", xzjxinfo.ApplyMonth, xzjxinfo.AttachContent, id);
             return Convert.ToInt32(obj);
         }
 
@@ -39,7 +39,7 @@ namespace UDS.Models
             DataTable dt = SQLHelper.ExecuteDataTable("select * from T_xzjx where id = @id", innerid);
             info.Id = innerid;
             info.ApplyMonth = Convert.ToDateTime(dt.Rows[0]["applymonth"].ToString());
-            info.AttchContent = dt.Rows[0]["attachcontent"].ToString();
+            info.AttachContent = dt.Rows[0]["attachcontent"].ToString();
             return info;
         }
     }

@@ -15,7 +15,7 @@ namespace UDS.Models
         public string NextSignName { get; set; }
         public string CurrentState { get; set; }
 
-        public InfoList DBDateToInfo(DataRow row, DataColumnCollection columns)
+        public InfoList DBDataToInfo(DataRow row, DataColumnCollection columns)
         {
             foreach (DataColumn colname in columns)
             {
@@ -31,7 +31,7 @@ namespace UDS.Models
                         this.EmployeeName = (row["employeename"] ?? "").ToString();
                         break;
                     case "writetime":
-                        this.WriteTime = (row["writetime"] ?? "").ToString();
+                        this.WriteTime = Convert.ToDateTime((row["writetime"] ?? "")).ToString("yyyy-MM-dd HH:mm:ss");
                         break;
                     case "nextname":
                         this.NextSignName = (row["nextname"] ?? "").ToString();

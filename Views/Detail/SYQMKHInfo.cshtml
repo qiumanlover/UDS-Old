@@ -1,49 +1,64 @@
 ﻿@model UDS.Models.SYQMKHInfo
+@{
+    string stylestr = "display:none";
+}
 
-@using (Ajax.BeginForm("SYQMKHInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+@using (Ajax.BeginForm("SYQMKHInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "writeview", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    <ul id="title">
+        <li>入职日期：</li>
+        <li>试用期满日期：</li>
+        <li>自我评定：</li>
+    </ul>
 
-    <table style="width:100%">
-        <tr>
-            <td style="width:40%" align="right">入职日期：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.EntryDate, new { onclick = "laydate({  format: 'YYYY-MM-DD' })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
-                @Html.ValidationMessageFor(model => model.EntryDate)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">试用期满日期：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.PassDate, new { onclick = "laydate({  format: 'YYYY-MM-DD' })", placeholder = "YYYY-MM-DD", Class = "laydate-icon" })
-                @Html.ValidationMessageFor(model => model.PassDate)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">自我评定：</td>
-        </tr>
-        <tr>
-            <td style="width:100%" colspan="2" align="center">
-                @Html.TextAreaFor(model => model.Valuation, new { style = "width: 80%; height: 300px" })
-            </td>
-        </tr>
-        <tr>
-            <td style ="width: 100%" colspan="2" align="center">
-                <div style="width: 80%; text-align: left">
-                    @Html.ValidationMessageFor(model => model.Valuation)
-                </div>
-            </td>
-        </tr>
-    </table>
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.EntryDate, new { onclick = "laydate({  format: 'YYYY-MM-DD' })", placeholder = "YYYY-MM-DD", Class = "laydate-icon", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.EntryDate)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.PassDate, new { onclick = "laydate({  format: 'YYYY-MM-DD' })", placeholder = "YYYY-MM-DD", Class = "laydate-icon", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.PassDate)
+        </li>
+        <li></li>
+        <li>
+            @Html.TextBoxFor(model => model.AttachContent, new { style = "display:none" })
+            @Html.ValidationMessageFor(model => model.AttachContent)
+        </li>
+    </ul>
+
+    if (ViewBag.Display == 0)
+    {
+        <div id="detailShowContainer">
+            <table>
+                <tr><td>@Html.Raw(Model.AttachContent)</td></tr>
+            </table>
+        </div>
+    }
+
     if (ViewBag.Display == 1)
     {
-        <script src="~/Scripts/jquery-1.8.2.js"></script>
-        <script src="~/Scripts/jquery.validate.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-        <div style="width:100%; text-align:center">
+        stylestr = "width:90%; text-align:right;";
+        <script type="text/javascript" charset="utf-8">
+            var content = $("input#AttachContent").val();
+            var editorOption = {
+                initialContent: content,
+                initialFrameHeight: 300,
+                initialFrameWidth: 810,
+                autoHeightEnabled: false,
+            };
+            var editor = new baidu.editor.ui.Editor(editorOption);
+            editor.render('editor');
+            $('#save').click(function () {
+                $('#AttachContent').val(editor.getContent());
+            });
+        </script>
+        <div id="btnContainer">
             <input type="submit" value="保存" id="save" name="save" />
             <input type="submit" value="发送" id="send" name="send" />
         </div>
     }
 }
+<div id="editorContainer">
+    <textarea id="editor" name="editor" style=@stylestr></textarea>
+</div>

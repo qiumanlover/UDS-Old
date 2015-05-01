@@ -38,17 +38,26 @@ namespace UDS.Controllers
             {
                 case 1:
                     ViewBag.ActionName = "NextSignList";
+                    ViewBag.ControllerName = "List";
                     break;
                 case 2:
                     ViewBag.ActionName = "OwnApplyList";
+                    ViewBag.ControllerName = "List";
                     break;
                 case 3:
                     ViewBag.ActionName = "RecordSignList";
+                    ViewBag.ControllerName = "List";
+                    break;
+                case 4:
+                    ViewBag.ActionName = "AgentSign";
+                    ViewBag.ControllerName = "Agent";
                     break;
                 default:
                     ViewBag.ActionName = "OwnApplyList";
+                    ViewBag.ControllerName = "List";
                     break;
             }
+            ViewBag.BackId = backid;
             return PartialView();
         }
 
@@ -77,6 +86,7 @@ namespace UDS.Controllers
         public ActionResult SignDeal()
         {
             int formflowid = Convert.ToInt32(Request["id"]);
+            int backid = Convert.ToInt32(Request["backid"]);
             int eid = (Session["user"] as User).Eid;
             string reason = Request["reason"];
             if (Request["agree"] != null && Request["disagree"] == null)
@@ -102,7 +112,14 @@ namespace UDS.Controllers
                 SQLHelper.ProcNoQuery("usp_SignFail", new SqlParameter("id", formflowid));
                 SQLHelper.ProcNoQuery("usp_SignRefuseInfo", new SqlParameter("formflowid", formflowid), new SqlParameter("@eid", eid), new SqlParameter("time", DateTime.Now), new SqlParameter("reason", reason));
             }
-            return RedirectToAction("NextSignList", "List", new { pageindex = 1 });
+            if (backid == 4)
+            {
+                return RedirectToAction("AgentSign", "Agent", new { pageindex = 1 });
+            }
+            else
+            {
+                return RedirectToAction("NextSignList", "List", new { pageindex = 1 });
+            }
         }
 
         private static int AddForm(int innerid, int formid, int eid, DateTime datetime, string signlist)
@@ -414,6 +431,7 @@ namespace UDS.Controllers
             return PartialView();
         }
 
+        [ValidateInput(false)]
         public ActionResult FYBXInfo(Dictionary<string, int> pars, FYBXInfo fybxinfo)
         {
             //初始化暂支信息            
@@ -457,6 +475,7 @@ namespace UDS.Controllers
                 }
                 else if (isOld.Equals("0"))
                 {//新建表单时的保存处理逻辑
+                    fybxinfo.AttachContent = fybxinfo.AttachContent ?? string.Empty;
                     int innerid = UDS.Models.FYBXInfo.AddInfo(fybxinfo);
                     int flowid = int.Parse(Request["id"]);
                     int eid = (Session["user"] as User).Eid;
@@ -498,6 +517,7 @@ namespace UDS.Controllers
             return PartialView();
         }
 
+        [ValidateInput(false)]
         public ActionResult SYQMKHInfo(Dictionary<string, int> pars, SYQMKHInfo syqmkhinfo)
         {
             if (pars.ContainsKey("isNew"))
@@ -556,6 +576,7 @@ namespace UDS.Controllers
             return PartialView();
         }
 
+        [ValidateInput(false)]
         public ActionResult HYJLInfo(Dictionary<string, int> pars, HYJLInfo hyjlinfo)
         {
             if (pars.ContainsKey("isNew"))
@@ -580,6 +601,7 @@ namespace UDS.Controllers
                 }
                 else if (isOld.Equals("0"))
                 {//新建表单时的保存处理逻辑
+                    hyjlinfo.AttachContent = hyjlinfo.AttachContent ?? string.Empty;
                     int innerid = UDS.Models.HYJLInfo.AddInfo(hyjlinfo);
                     int flowid = int.Parse(Request["id"]);
                     int eid = (Session["user"] as User).Eid;
@@ -614,7 +636,8 @@ namespace UDS.Controllers
             return PartialView();
         }
 
-        public ActionResult BGWJInfo(Dictionary<string, int> pars, BGWJInfo bgwjinfo)
+        [ValidateInput(false)]
+        public ActionResult CommonModelInfo(Dictionary<string, int> pars, CommonModelInfo commonmodelinfo)
         {
             if (pars.ContainsKey("isNew"))
             {//新建表单时的空页面显示
@@ -630,7 +653,7 @@ namespace UDS.Controllers
                     int formflowid = Convert.ToInt32(Request["id"]);
                     DataTable dtPreMain = SQLHelper.ProcDataTable("usp_PreMainInfo", new SqlParameter("@id", formflowid));
                     int innerid = Convert.ToInt32(dtPreMain.Rows[0]["forminnerid"]);
-                    UDS.Models.BGWJInfo.UpdateInfo(bgwjinfo, innerid);
+                    UDS.Models.CommonModelInfo.UpdateInfo(commonmodelinfo, innerid);
                     UpdateForm(formflowid);
                     ViewBag.Old = 1;
                     ViewBag.Id = formflowid;
@@ -638,7 +661,7 @@ namespace UDS.Controllers
                 }
                 else if (isOld.Equals("0"))
                 {//新建表单时的保存处理逻辑
-                    int innerid = UDS.Models.BGWJInfo.AddInfo(bgwjinfo);
+                    int innerid = UDS.Models.CommonModelInfo.AddInfo(commonmodelinfo);
                     int flowid = int.Parse(Request["id"]);
                     int eid = (Session["user"] as User).Eid;
                     List<string> signposlist = CalcSignList(flowid, eid);
@@ -665,13 +688,14 @@ namespace UDS.Controllers
             {//用于显示表单详细信息的处理逻辑
                 int innerid = pars["innerid"];
                 int show = pars["show"];
-                ViewData.Model = UDS.Models.BGWJInfo.GetInfoById(innerid);
+                ViewData.Model = UDS.Models.CommonModelInfo.GetInfoById(innerid);
                 ViewBag.Display = show;
                 return PartialView();
             }
             return PartialView();
         }
 
+        [ValidateInput(false)]
         public ActionResult QTJLInfo(Dictionary<string, int> pars, QTJLInfo qtjlinfo)
         {
             //初始化下拉列表的数据信息
@@ -732,6 +756,7 @@ namespace UDS.Controllers
             return PartialView();
         }
 
+        [ValidateInput(false)]
         public ActionResult XZJXInfo(Dictionary<string, int> pars, XZJXInfo xzjxinfo)
         {
             if (pars.ContainsKey("isNew"))
@@ -790,6 +815,7 @@ namespace UDS.Controllers
             return PartialView();
         }
 
+        [ValidateInput(false)]
         public ActionResult PXInfo(Dictionary<string, int> pars, PXInfo pxinfo)
         {
             //初始化下拉列表的数据信息            

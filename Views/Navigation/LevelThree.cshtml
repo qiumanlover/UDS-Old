@@ -1,11 +1,47 @@
-﻿<div>
-    @Ajax.ActionLink("我的申请", "OwnApplyList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { id = "fevent" })
-    <br />
-    @Ajax.ActionLink("草稿箱", "OwnDraftList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
-    <br />
-    @Ajax.ActionLink("撰稿", "WriteList", "List", null, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
-    <br />
-    @Ajax.ActionLink("代理", "Agent", new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
-    @*<br />
+﻿<link href="~/Content/treemenu.css" rel="stylesheet" />
+<script src="~/Scripts/treemenu.js"></script>
+<div>
+    <ul>
+        <li>
+            @Ajax.ActionLink("我的申请", "OwnApplyList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { id = "fevent" })
+        </li>
+        <li>
+            @Ajax.ActionLink("草稿箱", "OwnDraftList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+        </li>
+        <li>
+            @Ajax.ActionLink("撰稿", "WriteList", "List", null, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+        </li>
+        <li>
+            <ul id="menu_zzjs_net">
+                <li>
+                    <label>
+                        <a href="javascript:;">代理</a>
+                    </label>
+                    <ul class="two">
+                        <li>
+                            @Ajax.ActionLink("代理签核", "AgentSign", "Agent", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                        </li>
+                        <li>
+                            @Ajax.ActionLink("代理历史", "AgentHistory", "Agent", new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <label>
+                        <a href="javascript:;">统计</a>
+                    </label>
+                    <ul class="two">
+                        <li>
+                            @Ajax.ActionLink("请假时间", "QJSta", "Statistics", new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                        </li>
+                        <li>
+                            @Ajax.ActionLink("加班时间", "JBSta", "Statistics", new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        @*<br />
         @Ajax.ActionLink("修改密码", "ModifyPass", new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })*@
+</ul>
 </div>

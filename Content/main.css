@@ -5,14 +5,14 @@
 
 #header {
     width: 100%;
-    height: 60px;
+    height: 40px;
     background-color: aquamarine;
     position: relative;
     margin-bottom:15px;
 }
 
 #headinfo {
-    width: 40%;
+    width: 30%;
     height: 50%;
     float: right;
     position: absolute;
@@ -20,6 +20,7 @@
     right: 10px;
     align-content:center;
     align-items:center;
+    min-width:400px;
 }
 
 #greet {
@@ -29,20 +30,23 @@
 }
 
 #timeshow {
-    width: 40%;
+    width: 45%;
     height: 100%;
     float: left;
 }
 
 #logout {
-    width: 20%;
+    width: 10%;
     height: 100%;
     float: right;
 }
 
 #nav {
     float:left;
-    width: 15%;
+    width: 10%;
+    margin-left:5px;
+    text-align:center;
+    min-width:70px;
 }
 
 #content {

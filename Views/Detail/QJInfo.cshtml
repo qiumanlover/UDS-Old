@@ -31,51 +31,39 @@
 <span id="hourpreday" hidden>@ViewBag.HourPreDay</span>
 @using (Ajax.BeginForm("QJInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    <ul id="title">
+        <li>开始时间：</li>
+        <li>结束时间：</li>
+        <li>总时长：</li>
+        <li>请假缘由：</li>
+        <li>请假类别：</li>
+    </ul>
 
-    <table style="width:100%">
-        <tr>
-            <td style="width:40%" align="right">开始时间：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, min : laydate.now(" + ViewBag.Before + "), format: 'YYYY-MM-DD hh:mm:ss', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm:ss", Class = "laydate-icon-molv", value = DateTime.Now.ToString() })
-                @Html.ValidationMessageFor(model => model.BeginTime)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">结束时间：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, min : laydate.now(), format: 'YYYY-MM-DD hh:mm:ss', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm:ss", Class = "laydate-icon-molv", value = DateTime.Now.ToString() })
-                @Html.ValidationMessageFor(model => model.EndTime)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">总时长：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.TotalTime, new { onclick = "qjtotaltime()" })
-                @Html.ValidationMessageFor(model => model.TotalTime)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">请假缘由：</td>
-            <td style="width:60%">
-                @Html.TextBoxFor(model => model.Reason)
-                @Html.ValidationMessageFor(model => model.Reason)
-            </td>
-        </tr>
-        <tr>
-            <td style="width:40%" align="right">请假类别：</td>
-            <td style="width:60%">
-                @Html.DropDownListFor(model => model.TypeId, ViewData["typelist"] as List<SelectListItem>)
-            </td>
-        </tr>
-    </table>
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, min : laydate.now(" + ViewBag.Before + "), format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", value = DateTime.Now.ToString(), style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.BeginTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, min : laydate.now(), format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", value = DateTime.Now.ToString(), style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.TotalTime, new { onclick = "qjtotaltime()" })
+            @Html.ValidationMessageFor(model => model.TotalTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </li>
+        <li>
+            @Html.DropDownListFor(model => model.TypeId, ViewData["typelist"] as List<SelectListItem>)
+        </li>
+    </ul>
+
     if (ViewBag.Display == 1)
     {
-        <script src="~/Scripts/jquery-1.8.2.js"></script>
-        <script src="~/Scripts/jquery.validate.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-       <div style="width:100%; text-align:center">
+        <div id="btnContainer">
             <input type="submit" value="保存" id="save" name="save" onclick="qjtotaltime()" />
             <input type="submit" value="发送" id="send" name="send" onclick="qjtotaltime()" />
         </div>

@@ -40,3 +40,4 @@ D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.dll
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.pdb
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.csproj.GenerateResource.Cache
 D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.Properties.Resources.resources
+D:\Personal\SpecializedCourse\DotNet\Project\WebProject\UDS\obj\Debug\UDS.csprojResolveAssemblyReference.cache

@@ -1,32 +1,21 @@
 ﻿@model UDS.Models.BaseInfo
 
-<table style="width:100%">
-    <tr>
-        <td style="width:40%" align="right">流程名称：</td>
-        <td style="width:60%">@Model.Formname</td>
-    </tr>
-    <tr>
-        <td style="width:40%" align="right">申请人：</td>
-        <td style="width:60%">@Model.Applier</td>
-    </tr>
-    <tr>
-        <td style="width:40%" align="right">部门：</td>
-        <td style="width:60%">@Model.Department</td>
-    </tr>
-    <tr>
-        <td style="width:40%" align="right">职位：</td>
-        <td style="width:60%">@Model.Posotion</td>
-    </tr>
-    <tr>
-        <td style="width:40%" align="right">申请时间：</td>
-        <td style="width:60%">@Model.Writetime</td>
-    </tr>
-    <tr>
-        <td style="width:40%" align="right">当前状态：</td>
-        <td style="width:60%">@Model.State</td>
-    </tr>
-    <tr>
-        <td style="width:40%" align="right">下一签核人：</td>
-        <td style="width:60%">@Model.Nextname</td>
-    </tr>
-</table>
+<ul id="title">
+    <li>流程名称：</li>
+    <li>申请人：</li>
+    <li>部门：</li>
+    <li>职位：</li>
+    <li>申请时间：</li>
+    <li>当前状态：</li>
+    <li>下一签核人：</li>
+</ul>
+
+<ul id="title2">
+    <li>@Model.Formname</li>
+    <li>@Model.Applier</li>
+    <li>@Model.Department</li>
+    <li>@Model.Posotion</li>
+    <li>@Model.Writetime</li>
+    <li>@Model.State</li>
+    <li>@Model.Nextname</li>
+</ul>
