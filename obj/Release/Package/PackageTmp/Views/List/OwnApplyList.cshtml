@@ -1,0 +1,46 @@
+﻿@model IEnumerable<UDS.Models.InfoList>
+
+<div style="height:500px">
+    <ul style="list-style:none">
+        <li style="width:25%;float:left;text-align:center">流程名称</li>
+        <li style="width:30%;float:left;text-align:center">填写时间</li>
+        <li style="width:15%;float:left;text-align:center">待签核人</li>
+        <li style="width:20%;float:left;text-align:center">当前状态</li>
+        <li style="width:10%;float:left;text-align:center"></li>
+    </ul>
+    <div>
+            @foreach (var item in Model)
+            {
+                <ul>
+                    <li style="width:25%;float:left;text-align:center">
+                        @Html.DisplayFor(modelItem => item.FormName)
+                    </li>
+                    <li style="width:30%;float:left;text-align:center">
+                        @Html.DisplayFor(modelItem => item.WriteTime)
+                    </li>
+                    <li style="width:15%;float:left;text-align:center">
+                        @Html.DisplayFor(modelItem => item.NextSignName)
+                    </li>
+                    <li style="width:20%;float:left;text-align:center">
+                        @Html.DisplayFor(modelItem => item.CurrentState)
+                    </li>
+                    <li style="width:10%;float:left;text-align:center">
+                        @Ajax.ActionLink("进入", "DetailContainer", "Detail", new RouteValueDictionary(new { id = item.Id, show = 0, canSign = 0, backid = 2 }), new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                    </li>
+                </ul>
+                <br />
+            }
+  </div>
+</div>
+<br />
+<div style="width:100%; text-align:center">
+    @Ajax.ActionLink("首页", "OwnApplyList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    @Ajax.ActionLink("上一页", "OwnApplyList", "List", new { pageindex = @ViewBag.pageIndex - 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    第 @ViewBag.pageIndex / @ViewBag.pageCount 页
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    @Ajax.ActionLink("下一页", "OwnApplyList", "List", new { pageindex = @ViewBag.pageIndex + 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    @Ajax.ActionLink("尾页", "OwnApplyList", "List", new { pageindex = @ViewBag.pageCount }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+</div>

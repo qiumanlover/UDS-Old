@@ -3,9 +3,9 @@
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
-@using (Ajax.BeginForm("AgentAdd", null, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }, new { style = "margin-top:90px" }))
+@using (Ajax.BeginForm("AgentAdd", null, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }, new { style = "margin-top:90px;" }))
 {
-    <ul style="list-style:none; width:100%">
+    <ul style="list-style:none">
         <li style="width:30%; float:left; text-align:right">代理人：</li>
         <li style="width:50%; float:left; text-align:left">
             @Html.DropDownListFor(model => model.AgentId, ViewData["typelist"] as List<SelectListItem>, new { style = "width:100px" })

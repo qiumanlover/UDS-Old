@@ -1,0 +1,79 @@
+﻿@model UDS.Models.QTJLInfo
+@{
+    string stylestr = "display:none";
+}
+
+@using (Ajax.BeginForm("QTJLInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "writeview", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    <ul id="title">
+        <li>出访人：</li>
+        <li>受访人：</li>
+        <li>出访性质：</li>
+        <li>开始时间：</li>
+        <li>结束时间：</li>
+        <li>出访记录：</li>
+    </ul>
+
+    <ul id="input">
+        <li>
+            @Html.DropDownListFor(model => model.VisitorId, ViewData["typelist"] as List<SelectListItem>)
+            @Html.ValidationMessageFor(model => model.VisitorId)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.BeVisitor)
+            @Html.ValidationMessageFor(model => model.BeVisitor)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Property)
+            @Html.ValidationMessageFor(model => model.Property)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, min : laydate.now(), format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.BeginTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </li>
+        <li></li>
+        <li>
+            @Html.TextBoxFor(model => model.AttachContent, new { style = "display:none" })
+            @Html.ValidationMessageFor(model => model.AttachContent)
+        </li>
+    </ul>
+
+    if (ViewBag.Display == 0)
+    {
+        <div id="detailShowContainer">
+            <table>
+                <tr><td>@Html.Raw(Model.AttachContent)</td></tr>
+            </table>
+        </div>
+    }
+
+    if (ViewBag.Display == 1)
+    {
+        stylestr = "width:90%; text-align:right;";
+        <script type="text/javascript" charset="utf-8">
+            var content = $("input#AttachContent").val();
+            var editorOption = {
+                initialContent: content,
+                initialFrameHeight: 300,
+                initialFrameWidth: 810,
+                autoHeightEnabled: false,
+            };
+            var editor = new baidu.editor.ui.Editor(editorOption);
+            editor.render('editor');
+            $('#save').click(function () {
+                $('#AttachContent').val(editor.getContent());
+            });
+        </script>
+        <div id="btnContainer">
+            <input type="submit" value="保存" id="save" name="save" />
+            <input type="submit" value="发送" id="send" name="send" />
+        </div>
+    }
+}
+<div id="editorContainer">
+    <textarea id="editor" name="editor" style=@stylestr></textarea>
+</div>

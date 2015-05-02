@@ -1,0 +1,52 @@
+﻿@model UDS.Models.JBInfo
+
+<script type="text/javascript">
+    function totaltime() {
+        var begintime = Date.parse(new Date($("#BeginTime").val().toString().replace(/-/g, "/")));
+        var endtime = Date.parse(new Date($("#EndTime").val().toString().replace(/-/g, "/")));
+        var totaltime = endtime - begintime;
+        var time = totaltime * 1.0 / (1000 * 3600);
+        $("#TotalTime").val(time.toFixed(2));
+    }
+</script>
+
+@using (Ajax.BeginForm("JBInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    <ul id="title">
+        <li>开始时间：</li>
+        <li>结束时间：</li>
+        <li>总时长：</li>
+        <li>加班缘由：</li>
+        <li>结算方式：</li>
+    </ul>
+
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, min : laydate.now(" + ViewBag.Before + "), format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", value = DateTime.Now.ToString(), style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.BeginTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.TotalTime, new { onclick = "totaltime()", Readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.TotalTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </li>
+        <li>
+            @Html.DropDownListFor(model => model.TypeId, ViewData["typelist"] as List<SelectListItem>)
+        </li>
+    </ul>
+
+    if (ViewBag.Display == 1)
+    {
+        <div id="btnContainer">
+            <input type="submit" value="保存" id="save" name="save" onclick="totaltime()" />
+            <input type="submit" value="发送" id="send" name="send" onclick="totaltime()" />
+        </div>
+    }
+}

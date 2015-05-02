@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+    <title></title>
+    @{
+        string pagename = ViewBag.pageName;
+    }
+</head>
+<body>
+    <div style="float:left">
+        @Ajax.ActionLink("返回", "WriteList", "List", new AjaxOptions() { UpdateTargetId = "replace ", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    </div>
+    <div id="writeview">
+        @{
+            Html.RenderAction(pagename, new { isNew = 1, id = ViewBag.Id });
+        }
+    </div>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

@@ -99,7 +99,13 @@ namespace UDS.Controllers
 
         public ActionResult AgentAdd(AgencyList agency)
         {
-            ViewData["typelist"] = UDS.Models.QTJLInfo.GetTypeList();
+            DataTable typedata = SQLHelper.ProcDataTable("usp_EmployeeSelectorOn");
+            List<SelectListItem> typeList = new List<SelectListItem>();
+            foreach (DataRow row in typedata.Rows)
+            {
+                typeList.Add(new SelectListItem { Value = row["id"].ToString(), Text = row["name"].ToString() });
+            }
+            ViewData["typelist"] = typeList;
             if (Request["save"] != null)
             {
                 agency.GrantorId = (Session["user"] as User).Eid;

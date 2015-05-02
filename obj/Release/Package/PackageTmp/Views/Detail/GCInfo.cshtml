@@ -1,0 +1,33 @@
+﻿@model UDS.Models.GCInfo
+
+@using (Ajax.BeginForm("GCInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "writeview", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    <ul id="title">
+        <li>开始时间：</li>
+        <li>结束时间：</li>
+        <li>公出事由：</li>
+    </ul>
+
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, min : laydate.now(" + ViewBag.Before + "), format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.BeginTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon-molv", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </li>
+    </ul>
+
+    if (ViewBag.Display == 1)
+    {
+        <div id="btnContainer">
+            <input type="submit" value="保存" id="save" name="save" />
+            <input type="submit" value="发送" id="send" name="send" />
+        </div>
+    }
+}

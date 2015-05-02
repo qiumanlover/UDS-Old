@@ -1,0 +1,15 @@
+﻿@*<div>
+        <table>
+            @foreach (KeyValuePair<int, string> item in ViewBag.flowList)
+            {
+                <tr><td>@Ajax.ActionLink(item.Value, "DetailContainer", "Detail", new { id = item.Key }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })</td></tr>
+            }
+        </table>
+    </div>*@
+
+<div style="width:100%; float:left">
+    @foreach (KeyValuePair<int, string> item in ViewBag.flowList)
+    {
+        <div style="float:left; margin-left:30px; margin-top:20px">@Ajax.ActionLink(item.Value, "WriteContainer", "Detail", new { flowid = item.Key }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })</div>
+    }
+</div>

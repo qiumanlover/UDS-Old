@@ -1,0 +1,33 @@
+﻿@model UDS.Models.ZZInfo
+
+@using (Ajax.BeginForm("GDZCInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    <ul id="title">
+        <li>暂支金额：</li>
+        <li>暂支事由：</li>
+        <li>预计报销日期：</li>
+    </ul>
+
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.Money)
+            @Html.ValidationMessageFor(model => model.Money)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.PreDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', start : laydate.now() })", placeholder = "YYYY-MM-DD", Class = "laydate-icon", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.PreDate)
+        </li>
+    </ul>
+
+    if (ViewBag.Display == 1)
+    {
+        <div id="btnContainer">
+            <input type="submit" value="保存" id="save" name="save" />
+            <input type="submit" value="发送" id="send" name="send" />
+        </div>
+    }
+}

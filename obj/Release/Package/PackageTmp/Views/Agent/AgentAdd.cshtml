@@ -1,0 +1,36 @@
+﻿@model UDS.Models.AgencyList
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+@using (Ajax.BeginForm("AgentAdd", null, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }, new { style = "margin-top:90px;" }))
+{
+    <ul style="list-style:none; width:100%">
+        <li style="width:30%; float:left; text-align:right">代理人：</li>
+        <li style="width:50%; float:left; text-align:left">
+            @Html.DropDownListFor(model => model.AgentId, ViewData["typelist"] as List<SelectListItem>, new { style = "width:100px" })
+            @Html.ValidationMessageFor(model => model.AgentId)
+        </li>
+    </ul>
+    <br /><br />
+    <ul>
+        <li style="width:30%; float:left; text-align:right">开始时间：</li>
+        <li style="width:50%; float:left; text-align:left">
+            @Html.TextBoxFor(model => model.BeginTime, new { onclick = "laydate({ istime: true, format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon" })
+            @Html.ValidationMessageFor(model => model.BeginTime)
+        </li>
+    </ul>
+    <br /><br />
+    <ul>
+        <li style="width:30%; float:left; text-align:right">结束时间：</li>
+        <li style="width:50%; float:left; text-align:left">
+            @Html.TextBoxFor(model => model.EndTime, new { onclick = "laydate({ istime: true, format: 'YYYY-MM-DD hh:mm', start : laydate.now() })", placeholder = "YYYY-MM-DD hh:mm", Class = "laydate-icon" })
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </li>
+    </ul>
+    <br /><br />
+    <div style="width:70%; text-align:center">
+        <input type="submit" value="添加" id="save" name="save" />
+        @Ajax.ActionLink("返回", "AgentConfig", new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace" })
+    </div>
+}

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UDS.Models.InfoList>
+<div style="height:500px">
+    <table border="0" style="width:100%">
+        <thead id="tbhead">
+            <tr>
+                <td style="width:25%" align="center">流程名称</td>
+                <td style="width:20%" align="center">申请人</td>
+                <td style="width:25%" align="center">填写时间</td>
+                <td style="width:20%" align="center">待签核人</td>
+                <td style="width:10%" align="center"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:25%" align="center">
+                        @Html.DisplayFor(modelItem => item.FormName)
+                    </td>
+                    <td style="width:20%" align="center">
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                    </td>
+                    <td style="width:25%" align="center">
+                        @Html.DisplayFor(modelItem => item.WriteTime)
+                    </td>
+                    <td style="width:20%" align="center">
+                        @Html.DisplayFor(model => item.NextSignName)
+                    </td>
+                    <td style="width:10%" align="center">
+                        @Ajax.ActionLink("进入", "DetailContainer", "Detail", new { id = item.Id, show = 0, canSign = 1, backid = 4 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<div style="width:100%; text-align:center">
+    @Ajax.ActionLink("首页", "AgentSign", "Agent", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    @Ajax.ActionLink("上一页", "AgentSign", "Agent", new { pageindex = @ViewBag.pageIndex - 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    第 @ViewBag.pageIndex / @ViewBag.pageCount 页
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    @Ajax.ActionLink("下一页", "AgentSign", "Agent", new { pageindex = @ViewBag.pageIndex + 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    @Ajax.ActionLink("尾页", "AgentSign", "Agent", new { pageindex = @ViewBag.pageCount }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+</div>

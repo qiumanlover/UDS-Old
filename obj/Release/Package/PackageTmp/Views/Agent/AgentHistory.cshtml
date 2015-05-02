@@ -1,0 +1,29 @@
+﻿@model IEnumerable<UDS.Models.AgencyList>
+
+<div style="width:100%">
+    <div>
+        <ul style="list-style:none; width:100%">
+            <li style="width:30%; float:left; text-align:center">授权人</li>
+            <li style="width:35%; float:left; text-align:center">开始时间</li>
+            <li style="width:35%; float:left; text-align:center">结束时间</li>
+        </ul>
+        <br />
+        <br />
+        @foreach (var item in Model)
+        {
+            <ul style="list-style:none; width:100%">
+                <li style="width:30%; float:left; text-align:center">
+                    @Html.DisplayFor(modelItem => item.GrantorName)
+                </li>
+                <li style="width:35%; float:left; text-align:center">
+                    @Html.DisplayFor(modelItem => item.BeginTime)
+                </li>
+                <li style="width:35%; float:left; text-align:center">
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </li>
+            </ul>
+            <br />
+        }
+    </div>
+</div>
+

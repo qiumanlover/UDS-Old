@@ -1,4 +1,4 @@
-﻿<div style="text-align:center; margin-top:100px; width:70%">
+﻿<div style="text-align:center; margin-top:100px; min-width:600px;">
     <script src="~/Scripts/hxmd5.js"></script>
     @using (Ajax.BeginForm("ModifyPass", new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace }))
     {
@@ -16,7 +16,7 @@
                 <input type="password" id="newpass2" name="newpass2" value="@ViewBag.NewPass2" style="display:none" />
             </li>
             <li>
-                <input type="submit" id="submit" name="submit" value="确认修改" style="width:15%" />
+                <input type="submit" id="submit" name="submit" value="确认修改" style="width:15%; min-width:200px;" />
             </li>
             <li><label id="msg">@ViewBag.Msg</label></li>
         </ul>

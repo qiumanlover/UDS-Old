@@ -1,0 +1,19 @@
+﻿<html>
+<head>
+    <title></title>
+    @{
+        string pageName = ViewBag.PageName;
+    }
+</head>
+<body>
+    <div style="float:left">
+        @Ajax.ActionLink("返回", "OwnDraftList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace ", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+    </div>
+    <div style="width:100%">
+        @Html.Action(pageName, new { innerid = ViewBag.InnerId, show = ViewBag.Show, id = ViewBag.Id, isOld = ViewBag.isOld })
+    </div>
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

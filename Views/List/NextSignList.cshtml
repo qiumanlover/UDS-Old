@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<UDS.Models.InfoList>
 
 <div style="height:500px">
-    <ul style="list-style:none">
+    <ul style="list-style:none; min-width:600px;">
         <li style="width:40%;float:left;text-align:center">流程名称</li>
         <li style="width:20%;float:left;text-align:center">申请人</li>
         <li style="width:30%;float:left;text-align:center">填写时间</li>
@@ -10,7 +10,7 @@
     <div>
         @foreach (var item in Model)
         {
-            <ul>
+            <ul style="min-width:600px;">
                 <li style="width:40%;float:left;text-align:center">
                     @Html.DisplayFor(modelItem => item.FormName)
                 </li>
@@ -28,7 +28,7 @@
     </div>
 </div>
 <br />
-<div style="width:100%; text-align:center">
+<div style="width:100%; text-align:center; min-width:400px;">
     @Ajax.ActionLink("首页", "NextSignList", "List", new { pageindex = 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
     @Ajax.ActionLink("上一页", "NextSignList", "List", new { pageindex = @ViewBag.pageIndex - 1 }, new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })

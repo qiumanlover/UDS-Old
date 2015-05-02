@@ -1,0 +1,57 @@
+﻿@model UDS.Models.GDZCInfo
+
+<script type="text/javascript">
+    function totalprice() {
+        var count = Number($("#Count").val());
+        var singleprice = Number($("#SinglePrice").val());
+        var totalprice = singleprice * count;
+        $("#TotalPrice").val(totalprice.toFixed(2));
+    }
+</script>
+
+@using (Ajax.BeginForm("GDZCInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "replace", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    <ul id="title">
+        <li>设备名称：</li>
+        <li>数量：</li>
+        <li>描述：</li>
+        <li>单价：</li>
+        <li>总价：</li>
+        <li>需要日期：</li>
+    </ul>
+
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.DeviceName)
+            @Html.ValidationMessageFor(model => model.DeviceName)
+        </li>
+        <li>
+            @Html.EditorFor(model => model.Count, new { onclick = "totalprice()", value = "1" })
+            @Html.ValidationMessageFor(model => model.Count)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.SinglePrice, new { onKeyUp = "totalprice();" })
+            @Html.ValidationMessageFor(model => model.SinglePrice)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.TotalPrice, new { onclick = "totalprice()", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.TotalPrice)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.NeedDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', start : laydate.now() })", placeholder = "YYYY-MM-DD", Class = "laydate-icon", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.NeedDate)
+        </li>
+    </ul>
+
+    if (ViewBag.Display == 1)
+    {
+        <div id="btnContainer">
+            <input type="submit" value="保存" id="save" name="save" />
+            <input type="submit" value="发送" id="send" name="send" />
+        </div>
+    }
+}

@@ -1,0 +1,75 @@
+﻿@model UDS.Models.FYBXInfo
+
+@{
+    string stylestr = "display:none";
+}
+
+@using (Ajax.BeginForm("FYBXInfo", new { id = ViewBag.Id, isOld = ViewBag.Old }, new AjaxOptions() { UpdateTargetId = "writeview", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    <ul id="title">
+        <li>用途：</li>
+        <li>发生日期：</li>
+        <li>报销金额：</li>
+        <li>大写金额：</li>
+        <li>暂支金额：</li>
+        <li>应还金额：</li>
+        <li>明细：</li>
+    </ul>
+
+    <ul id="input">
+        <li>
+            @Html.TextBoxFor(model => model.Usage)
+            @Html.ValidationMessageFor(model => model.Usage)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.HappenDate, new { onclick = "laydate({ format: 'YYYY-MM-DD', festival: true, isclear: false, istoday:false, issure:false })", placeholder = "YYYY-MM-DD", Class = "laydate-icon", style = "width:150px;" })
+            @Html.ValidationMessageFor(model => model.HappenDate)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.Money)
+            @Html.ValidationMessageFor(model => model.Money)
+        </li>
+        <li>
+            @Html.TextBoxFor(model => model.BMoney)
+            @Html.ValidationMessageFor(model => model.BMoney)
+        </li>
+        <li>@Html.TextBoxFor(model => model.PrePay)</li>
+        <li>@Html.TextBoxFor(model => model.ReturnPay)</li>
+        <li></li>
+        <li>@Html.TextBoxFor(model => model.AttachContent, new { style = "display:none" })</li>
+    </ul>
+
+    if (ViewBag.Display == 0)
+    {
+        <div id="detailShowContainer">
+            <table>
+                <tr><td>@Html.Raw(Model.AttachContent)</td></tr>
+            </table>
+        </div>
+    }
+    if (ViewBag.Display == 1)
+    {
+        stylestr = "width:90%; text-align:right;";
+       <script type="text/javascript" charset="utf-8">
+            var content = $("input#AttachContent").val();
+            var editorOption = {
+                initialContent: content,
+                initialFrameHeight: 300,
+                initialFrameWidth: 810,
+                autoHeightEnabled: false,
+            };
+            var editor = new baidu.editor.ui.Editor(editorOption);
+            editor.render('editor');
+            $('#save').click(function () {
+                $('#AttachContent').val(editor.getContent());
+            });
+        </script>
+        <div id="btnContainer">
+            <input type="submit" value="保存" id="save" name="save" />
+            <input type="submit" value="发送" id="send" name="send" />
+        </div>
+    }
+}
+<div id="editorContainer">
+    <textarea id="editor" name="editor" style=@stylestr></textarea>
+</div>

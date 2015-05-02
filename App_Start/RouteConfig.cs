@@ -16,7 +16,7 @@ namespace UDS
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{uid}",
-                defaults: new { controller = "Home", action = "Index", uid = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Index", uid = UrlParameter.Optional }
             );
         }
     }

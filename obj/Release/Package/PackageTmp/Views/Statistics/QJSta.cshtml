@@ -1,0 +1,69 @@
+﻿@model IEnumerable<UDS.Models.StatisticsList>
+
+@{
+    int isback = ViewBag.IsBack;
+}
+<div style="float:left; width:100%">
+    <div style="margin-top:30px">
+        @using (Ajax.BeginForm("QJSta", new AjaxOptions() { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace" }))
+        {
+            <ul style="list-style:none; width:100%">
+                <li style="width:30%; float:left; text-align:center">
+                    <input id="sbegintime" name="sbegintime" class="laydate-icon" placeholder="YYYY-MM-DD hh:mm" value="@ViewBag.BeginTime" />
+                </li>
+                <li style="width:30%; float:left; text-align:center">
+                    <input id="sendtime" name="sendtime" class="laydate-icon" placeholder="YYYY-MM-DD hh:mm" value="@ViewBag.EndTime" />
+                </li>
+                <li style="width:20%; float:left; text-align:center">
+                    <input type="submit" id="submit" name="submit" value="查找" style="width:100px; height:30px" />
+                </li>
+            </ul>
+            <script type="text/javascript">
+                laydate({
+                    elem: "#sbegintime",
+                    istime: true,
+                    format: 'YYYY-MM-DD hh:mm',
+                    start: laydate.now()
+                });
+                laydate({
+                    elem: "#sendtime",
+                    istime: true,
+                    format: 'YYYY-MM-DD hh:mm',
+                    start: laydate.now()
+                });
+            </script>
+        }
+    </div>
+    <br /><br />
+    <div>
+        <ul style="list-style:none; width:100%">
+            <li style="width:30%; float:left; text-align:center">开始时间</li>
+            <li style="width:30%; float:left; text-align:center">结束时间</li>
+            <li style="width:20%; float:left; text-align:center">请假类别</li>
+            <li style="width:20%; float:left; text-align:center">总时长</li>
+        </ul>
+        <br /><br />
+        @if (isback == 1)
+        {
+            foreach (var item in Model)
+            {
+                <ul style="list-style:none; width:100%">
+                    <li style="width:30%; float:left; text-align:center">
+                        @Html.DisplayFor(modelItem => item.BeginTime)
+                    </li>
+                    <li style="width:30%; float:left; text-align:center">
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </li>
+                    <li style="width:20%; float:left; text-align:center">
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </li>
+                    <li style="width:20%; float:left; text-align:center">
+                        @Html.DisplayFor(modelItem => item.TimeCount)
+                    </li>
+                </ul>
+                <br />
+            }
+        }
+
+    </div>
+</div>

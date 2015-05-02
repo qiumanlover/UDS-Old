@@ -1,0 +1,52 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#header {
+    width: 100%;
+    height: 25px;
+    background-color: aquamarine;
+    margin-bottom: 20px;
+    min-width: 860px;
+}
+
+#nav {
+    float: left;
+    width: 40%;
+    text-align: left;
+    min-width: 500px;
+}
+
+#headinfo {
+    width: 20%;
+    float: right;
+    text-align: left;
+    min-width: 350px;
+    margin-right: 10px;
+    line-height: 25px;
+}
+
+#greet {
+    float: left;
+    width: 40%;
+}
+
+#timeshow {
+    width: 40%;
+    float: left;
+}
+
+#logout {
+    text-align: right;
+    width: 20%;
+    float: left;
+}
+
+    #logout a {
+        text-decoration: none;
+    }
+
+#content {
+    width: 100%;
+}

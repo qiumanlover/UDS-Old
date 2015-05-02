@@ -48,7 +48,8 @@ namespace UDS.Models
 
         internal static List<SelectListItem> GetTypeList()
         {
-            DataTable typedata = SQLHelper.ExecuteDataTable("select id, name from T_employee where isonjob=1", null);
+            DataTable typedata = SQLHelper.ProcDataTable("usp_EmployeeSelectorOn");
+            //DataTable typedata = SQLHelper.ExecuteDataTable("select id, name from T_employee where isonjob=1", null);
             List<SelectListItem> typeList = new List<SelectListItem>();
             foreach (DataRow row in typedata.Rows)
             {
